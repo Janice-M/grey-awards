@@ -11,3 +11,42 @@ class Tags(models.Model):
 
     def __str__(self):
         return self.name
+class Project(models.Model):
+    title=models.CharField(max_length=60)
+    post=HTMLField()
+    #one aricle has one author
+    editor=models.ForeignKey(User,on_delete=models.CASCADE)  
+    #since one article can have many tags
+    tags=models.ManyToManyField(Tags) 
+
+    #save exact time article is published 
+    pub_date=models.DateTimeField(auto_now_add=True)  
+
+    project_image=models.ImageField(upload_to='articles/',default='')
+
+    @classmethod
+    def todays_project(cls):
+        today = dt.date.today()
+        project = cls.objects.filter(pub_date__date = today)
+        return project 
+
+    @classmethod
+    def days_project(cls,date):
+        project = cls.objects.filter(pub_date__date = date)
+        return project
+
+    @classmethod
+    def search_by_title(cls,search_term):
+        project=cls.objects.filter(title__icontains=search_term)
+
+        return project
+
+class NewsLetterRecipients(models.Model):
+    name=models.CharField(max_length=30) 
+    email=models.EmailField()      
+
+
+class MoringaMerch(models.Model):
+    name = models.CharField(max_length=40)
+    description = models.TextField()
+    price = models.DecimalField(decimal_places=2, max_digits=20)
