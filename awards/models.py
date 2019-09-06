@@ -22,7 +22,7 @@ class Project(models.Model):
     #save exact time article is published 
     pub_date=models.DateTimeField(auto_now_add=True)  
 
-    project_image=models.ImageField(upload_to='articles/',default='')
+    project_image=models.ImageField(upload_to='projects/',default='')
 
     @classmethod
     def todays_project(cls):
