@@ -1,0 +1,12 @@
+Welcome Rafiki , {{user}},
+
+Thanks for signing up at GreyAwards! This is your key in order to activate your account: {{authentication_key}}.
+
+If account isn't activated before {{expiration_days}} days then it shall be deactivated.
+
+Follow this link to activate your account : {{site}}/accounts/authentication/{{authentication_key}}
+
+
+
+With love,
+GreyAwards Management
