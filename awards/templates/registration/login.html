@@ -1,0 +1,68 @@
+{% extends "registration/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="jumbotron ">
+        <div class="row">
+            <marquee behavior="" direction="">
+                <h1>Grey Awards</h1>
+            </marquee>
+            <div class="col-8">
+
+
+            </div>
+
+            <div class="col-4">
+            </div>
+
+
+
+            <div class="col-md-4 form-section">
+
+                {% if form.errors %}
+                <p>Password or Username is incorrect</p>
+                {% endif %}
+
+                <div class="panel panel-default" style="margin-top:200px;">
+
+                    <div class="panel-body">
+
+                        <div class="text-center">
+                            <form action="/accounts/login/" method="post">
+
+                                {% csrf_token%}
+                                {% bootstrap_form form %}
+
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-primary login-button" value="Log in">
+
+                                </div>
+                                <input type="hidden" name="next" value="/">
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body text-center">
+                        <p> Already Have an Account Rafiki? <span><a class="" href="/accounts/register">Sign
+                                    Up</a></span>
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    
+</style>
+{% endblock %}
+
