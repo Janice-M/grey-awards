@@ -1,15 +1,22 @@
 from django import forms
-from.models import Article
+from .models import Project,Profile,Rating
 
-class NewsLetterForm(forms.Form):
-    your_name=forms.CharField(label='Preferred  Name',max_length=30)
-    email=forms.EmailField(label='Email')
-
-
-class NewArticleForm(forms.ModelForm):
+class ProjectForm(forms.ModelForm):
     class Meta:
-        model=Article
-        exclude=['profile','pub_date']
+        model=Project
+        exclude=['username','post_date','design','usability','creativity','content','overall_score','avatar','country']
         widgets={
-            'tags':forms.CheckboxSelectMultiple(),
+        'colors':forms.CheckboxSelectMultiple(),
+        'technologies':forms.CheckboxSelectMultiple(),
+        'categories':forms.CheckboxSelectMultiple(),
         }
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model=Profile
+        exclude=['username']
+
+class RatingForm(forms.ModelForm):
+    class Meta:
+        model=Rating
+        exclude=['overall_score','profile','project']
