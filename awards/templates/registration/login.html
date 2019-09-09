@@ -3,23 +3,23 @@
 {% load static %}
 
 {% block content %}
-<div class="container-fluid" style="background-image:'/awards/static/images/bodyAwards.jpeg';">
-    <div class="jumbotron ">
+<div class="container-fluid" >
+    <div class="jumbotron " style="background-color: antiquewhite;">
         <div class="row">
+    <h1 class="text-center">Welcome To Grey Awards Rafiki :)</h1>
             <marquee behavior="" direction="">
-                <h1 class="text-center">Grey Awards</h1>
+                <h1 class="text-center"> Made with love by Grey </h1>
             </marquee>
             <div class="col-8">
-                <img src="/awards/static/images/greyawards1.jpg">
+
+                
+                    <img class="card-img-top img-responsive" src="{% static '/images/greyawards1.jpg'%}"
+                    alt="Card image cap">
+                
+
                 <small>Welcome to East African Grey Awards</small>
             </div>
-
-            <div class="col-4">
-            </div>
-
-
-
-            <div class="col-md-4 form-section">
+            <div class="col-4 form-section">
 
                 {% if form.errors %}
                 <p>Password or Username is incorrect</p>
@@ -54,7 +54,7 @@
                         </p>
                     </div>
                 </div>
-                i
+                
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@
 
 <style>
 
-
+.container-fluid{ background-image:urll('/awards/static/images/bodyAwards.jpeg');}
 
 </style>
 {% endblock %}

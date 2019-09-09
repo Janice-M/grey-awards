@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
-{% load bootstrap4 %}
 {% load static %}
 {% load staticfiles %}
 
@@ -49,22 +48,22 @@
         </div>
         {% endfor %}
 
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        <div class="col-xs-12  col-md-6 col-lg-6">
             <div class="card" style="width: 40.2rem;">
-                <img class="card-img-top img-responsive" src="{% static '/awards/static/images/greyawards2.jpg'%}"
+                <img class="card-img-top img-responsive" src="{% static '/images/greyawards2.jpg'%}"
                     alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title" style="line-height:28px;">Beautiful People</h5>
+                    <h5 class="card-title" >Beautiful People</h5>
                     <p class="card-text">From Francais 2.0 <span class="date">6.9.2019</span></p>
                 </div>
                 <!-- <img src="/awards/static/images/greyawards2.jpg" alt=""> -->
 
             </div>
         </div>
-
+<!-- 
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
             <div class="card" style="width: 40.2rem;">
-                <img class="card-img-top img-responsive" src="{% static '/awards/static/images/pombe.jpg'%}" alt="Card image cap">
+                <img class="card-img-top img-responsive" src="{% static '/images/pombe.jpg'%}" alt="Card image cap">
                 <div class="card-body">
                     <h5 class="card-title" style="line-height:28px;">Meme</h5>
                     <p class="card-text">From Wasini <span class="date">24.9.2019</span></p>
@@ -72,13 +71,13 @@
 
 
             </div>
-        </div>
+        </div> -->
 
-        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            <div class="card" style="width: 40.2rem;">
-                <img class="card-img-top img-responsive" src="{% static '/awards/static/images/zahra.jpeg'%}" alt="Card image cap">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="card">
+                <img class="card-img-top img-responsive" src="{% static '/images/zahra.jpeg'%}" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title" style="line-height:28px;">Medicine</h5>
+                    <h5 class="card-title" >Medicine</h5>
                     <p class="card-text">From Outer Space to Your Heart <span class="date">4.20.2019</span></p>
                 </div>
 

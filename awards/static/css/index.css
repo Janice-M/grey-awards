@@ -1,6 +1,14 @@
 body{
-  background-color: #f4f7f6;
+  background-color:antiquewhite;
+
 }
+#directory{
+  background-image: url("/awards/static/images/bodyAwards.jpeg");
+  color: brown;
+}
+
+
+
 .landingpage{
   width:100%;
   height:700px;

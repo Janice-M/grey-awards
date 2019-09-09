@@ -21,7 +21,7 @@ from .serializer import ProfileSerializer,ProjectSerializer,technologiesSerializ
 def index(request):
     date = dt.date.today()
     winners=Project.objects.all()[:4]
-    caraousel = Project.objects.order_by('-overall_score')[0]
+    # carousel = Project.objects.order_by('-overall_score')[0]
     nominees=Project.objects.all()[4:8]
     directories=Project.objects.all()[8:11]
     resources=Project.objects.all()[11:15]
@@ -31,12 +31,12 @@ def index(request):
         if not request.user.is_authenticated:
             return redirect('/accounts/login/')
         current_user = request.user
-        profile =Profile.objects.get(username=current_user)
+        #profile = profile.objects.get(username=current_user)
         print(current_user)
     except ObjectDoesNotExist:
         return redirect('newProfile')
 
-    return render(request,'index.html',{"winners":winners,"profile":profile,"caraousel":caraousel,"date":date,"nominees":nominees,"directories":directories,"resources":resources,"resources2":resources2})
+    return render(request,'index.html',{"winners":winners,"profile":profile,"date":date,"nominees":nominees,"directories":directories,"resources":resources,"resources2":resources2})
 
 @login_required(login_url='/accounts/login/')
 def create_profile(request):
@@ -57,7 +57,7 @@ def create_profile(request):
 @login_required(login_url='/accounts/login/')
 def new_project(request):
     current_user = request.user
-    profile =Profile.objects.get(username=current_user)
+    #profile =Profile.objects.get(username=current_user)
     if request.method =='POST':
         form = ProjectForm(request.POST,request.FILES)
         if form.is_valid():
@@ -75,20 +75,20 @@ def new_project(request):
 def directory(request):
     date = dt.date.today()
     current_user = request.user
-    profile =Profile.objects.get(username=current_user)
+    #profile =Profile.objects.get(username=current_user)
 
     winners=Project.objects.all()
-    caraousel = Project.objects.get(id=8)
+    #caraousel = Project.objects.get(id=8)
 
-    return render(request,'directory.html',{"winners":winners,"profile":profile,"caraousel":caraousel,"date":date})
+    return render(request,'directory.html',{"winners":winners,"profile":profile,"date":date})
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
     current_user = request.user
-    profile =Profile.objects.get(username=current_user)
+    #profile =Profile.objects.get(username=current_user)
     projects=Project.objects.filter(username=current_user)
 
-    return render(request,'profile.html',{"projects":projects,"profile":profile})
+    return render(request,'profile.html',{"projects":projects,})
 
 @login_required(login_url='/accounts/login/')
 def site(request,site_id):
@@ -158,7 +158,7 @@ def site(request,site_id):
 @login_required(login_url='/accounts/login/')
 def search_results(request):
     current_user = request.user
-    profile =Profile.objects.get(username=current_user)
+    #profile =Profile.objects.get(username=current_user)
     if 'project' in request.GET and request.GET["project"]:
         search_term = request.GET.get("project")
         searched_projects = Project.search_project(search_term)
@@ -175,7 +175,7 @@ def search_results(request):
 @login_required(login_url='/accounts/login/')
 def user_profile(request,username):
     user = User.objects.get(username=username)
-    profile =Profile.objects.get(username=user)
+    #profile =Profile.objects.get(username=user)
     projects=Project.objects.filter(username=user)
 
     return render(request,'userProfile.html',{"projects":projects,"profile":profile})
