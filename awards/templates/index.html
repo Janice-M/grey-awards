@@ -135,8 +135,8 @@
                 <!-- <img class="card-img-top img-responsive" src="{% static 'img/trial1.png'%}" alt="Card image cap" responsive> -->
                 <div class="card-body">
                     <h5 class="card-title" style="line-height:28px;font-size:15px;">Professional Directory</h5>
-                    <p class="card-text professional">Discover the best in <span
-                            style="color:#49c5b6">East Africa</span></p>
+                    <p class="card-text professional">Discover the best in <span style="color:#49c5b6">East
+                            Africa</span></p>
                     <br><br>
                     <a href="{% url 'directory' %}">
                         <button class="btn btn-default btn-sm" style="border-radius:18%;">Discover Magic!</button>
@@ -246,40 +246,40 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-circle-progress/1.1.3/circle-progress.min.js"></script>
 
 <script>
-    
+
     /* *how to work the caraousel from https://kottenator.github.io/jquery-circle-progress/ */
 
     var progressBarOptions = {
-	startAngle: -1.55,
-	size: 100,
-    value: {{caraousel.design}},
+        startAngle: -1.55,
+        size: 100,
+        value: {{ caraousel.design }},
     fill: {
-		color: 'Chocolate'
-	}
+        color: 'Chocolate'
+    }
 }
 
-$('.circle').circleProgress(progressBarOptions).on('circle-animation-progress', function(event, progress, stepValue) {
-	$(this).find('strong').text(String((stepValue/10).toFixed(2)));
+    $('.circle').circleProgress(progressBarOptions).on('circle-animation-progress', function (event, progress, stepValue) {
+        $(this).find('strong').text(String((stepValue / 10).toFixed(2)));
+    });
+
+    $('#circle-b').circleProgress({
+        value: {{ caraousel.usability }},
+        fill: {
+            color: 'Khaki'
+        }
 });
 
-$('#circle-b').circleProgress({
-	value : {{caraousel.usability}},
-	fill: {
-		color: 'Khaki'
-	}
+    $('#circle-c').circleProgress({
+        value: {{ caraousel.creativity }},
+        fill: {
+            color: 'DarkTurquoise'
+        }
 });
-
-$('#circle-c').circleProgress({
-	value : {{caraousel.creativity}},
-	fill: {
-		color: 'DarkTurquoise'
-	}
-});
-$('#circle-d').circleProgress({
-	value : {{caraousel.content}},
-	fill: {
-		color: 'SteelBlue'
-	}
+    $('#circle-d').circleProgress({
+        value: {{ caraousel.content }},
+        fill: {
+            color: 'SteelBlue'
+        }
 });
 
 
