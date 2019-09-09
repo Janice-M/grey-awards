@@ -6,8 +6,10 @@
 
 {% block styles%}
 {% bootstrap_css %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css"
+    integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 <link rel="stylesheet" href="{% static 'css/index.css' %}">
 {%endblock %}
@@ -15,33 +17,34 @@
 {% block content %}
 
 <div class="container headers">
-    <h4 style="float:left;"><span class="bold" >Today's Winners</span>  Previous Winners</h4>
+    <h4 style="float:left;"><span class="bold">Today's Winners</span> Previous Winners</h4>
 
 </div>
 <div class="pages">
-<div class="row">
-  {% for winner in winners %}
-  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-    <div class="card" style="height:38.6rem;width: 32.2rem;">
-      <img class="card-img-top-directory img-responsive" src="{{winner.landing_page.url}}" alt="Card image cap" >
-      <div class="directory-image">
-        <img src="{{winner.screenshot2.url}}" class="gallery-image" alt=""  width=30 height=30>
-      </div>
+    <div class="row">
+        {% for winner in winners %}
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="card" style="height:38.6rem;width: 32.2rem;">
+                <img class="card-img-top-directory img-responsive" src="{{winner.landing_page.url}}"
+                    alt="Card image cap">
+                <div class="directory-image">
+                    <img src="{{winner.screenshot2.url}}" class="gallery-image" alt="" width=30 height=30>
+                </div>
 
-    <div class="card-body text-center">
-      <a href="/site/{{winner.id}}" style="color:black;text-decoration:none;">
-        <h5 class="card-title" style="line-height:28px;">{{winner.title}}</h5>
-      </a>
-    <a href="{{winner.link}}">
-      <p class="card-text" style="font-size:14px;color:#49c5b6;font-weight:bold;">{{winner.title}}</p>
-    </a>
-    <p class="card-text" style="line-height:28px;">{{winner.country}}</p>
-  </div>
-</div>
-  </div>
-  {% endfor %}
+                <div class="card-body text-center">
+                    <a href="/site/{{winner.id}}" style="color:black;text-decoration:none;">
+                        <h5 class="card-title" style="line-height:28px;">{{winner.title}}</h5>
+                    </a>
+                    <a href="{{winner.link}}">
+                        <p class="card-text" style="font-size:14px;color:#49c5b6;font-weight:bold;">{{winner.title}}</p>
+                    </a>
+                    <p class="card-text" style="line-height:28px;">{{winner.country}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
 
-</div>
+    </div>
 </div>
 
 
