@@ -1,52 +1,117 @@
 from django.db import models
-import datetime as dt
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
+from django.db.models import Q
+
+import datetime as dt
 
 # Create your models here.
-#####tags for projects on grey awards
+class categories(models.Model):
+    categories= models.CharField(max_length=100)
 
-class Tags(models.Model):
-    name=models.CharField(max_length=30)
+    def __str__(self):
+        return self.categories
+
+    def save_category(self):
+        self.save()
+
+    @classmethod
+    def delete_category(cls,categories):
+        cls.objects.filter(categories=categories).delete()
+
+
+class technologies(models.Model):
+    technologies = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.technologies
+
+    def save_technology(self):
+        self.save()
+
+    @classmethod
+    def delete_technology(cls,technologies):
+        cls.objects.filter(technologies=technologies).delete()
+
+
+class colors(models.Model):
+    colors = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.colors
+
+    def save_color(self):
+        self.save()
+
+    @classmethod
+    def delete_color(cls,colors):
+        cls.objects.filter(colors=colors).delete()
+
+class countries(models.Model):
+    countries = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.countries
+
+    class Meta:
+        ordering = ['countries']
+
+
+    def save_country(self):
+        self.save()
+
+    @classmethod
+    def delete_country(cls,countries):
+        cls.objects.filter(countries=countries).delete()
+
+class Project(models.Model):
+    title = models.CharField(max_length=150)
+    landing_page = models.ImageField(upload_to='landingpage/')
+    description = HTMLField()
+    link= models.CharField(max_length=255)
+    username = models.ForeignKey(User,on_delete=models.CASCADE)
+    screenshot1 = models.ImageField(upload_to='screenshots/')
+    screenshot2 = models.ImageField(upload_to='screenshots/')
+    screenshot3 = models.ImageField(upload_to='screenshots/')
+    screenshot4 = models.ImageField(upload_to='screenshots/')
+    design = models.IntegerField(blank=True,default=0)
+    usability = models.IntegerField(blank=True,default=0)
+    creativity = models.IntegerField(blank=True,default=0)
+    content = models.IntegerField(blank=True,default=0)
+    overall_score = models.IntegerField(blank=True,default=0)
+    country = models.ForeignKey(countries,on_delete=models.CASCADE)
+    technologies = models.ManyToManyField(technologies)
+    categories = models.ManyToManyField(categories)
+    colors = models.ManyToManyField(colors)
+    post_date = models.DateTimeField(auto_now_add=True)
+    avatar = models.ImageField(upload_to='avatars/')
+
+    def __str__(self):
+        return self.title
+
+    @classmethod
+    def search_project(cls,search_term):
+        # projects = cls.objects.filter(Q(username__username=search_term) | Q(title__icontains=search_term) | Q(colors__colors=search_term) | Q(technologies__technologies=search_term) | Q(categories__categories=search_term) | Q(country__countries=search_term))
+        projects = cls.objects.filter(Q(username__username=search_term) | Q(title__icontains=search_term) | Q(country__countries=search_term) | Q(overall_score__icontains=search_term))
+        return projects
+
+
+class Profile(models.Model):
+    avatar = models.ImageField(upload_to='avatars/')
+    description = HTMLField()
+    country = models.ForeignKey(countries,on_delete=models.CASCADE)
+    username = models.ForeignKey(User,on_delete=models.CASCADE)
+    name =models.CharField(max_length=100)
+    email = models.EmailField()
 
     def __str__(self):
         return self.name
-class Project(models.Model):
-    title=models.CharField(max_length=60)
-    post=HTMLField()
-    #one aricle has one author
-    editor=models.ForeignKey(User,on_delete=models.CASCADE)  
-    #since one article can have many tags
-    tags=models.ManyToManyField(Tags) 
 
-    #save exact time article is published 
-    pub_date=models.DateTimeField(auto_now_add=True)  
-
-    project_image=models.ImageField(upload_to='projects/',default='')
-
-    @classmethod
-    def todays_project(cls):
-        today = dt.date.today()
-        project = cls.objects.filter(pub_date__date = today)
-        return project 
-
-    @classmethod
-    def days_project(cls,date):
-        project = cls.objects.filter(pub_date__date = date)
-        return project
-
-    @classmethod
-    def search_by_title(cls,search_term):
-        project=cls.objects.filter(title__icontains=search_term)
-
-        return project
-
-class NewsLetterRecipients(models.Model):
-    name=models.CharField(max_length=30) 
-    email=models.EmailField()      
-
-
-class MoringaMerch(models.Model):
-    name = models.CharField(max_length=40)
-    description = models.TextField()
-    price = models.DecimalField(decimal_places=2, max_digits=20)
+class Rating(models.Model):
+    design = models.IntegerField(blank=True,default=0)
+    usability = models.IntegerField(blank=True,default=0)
+    creativity = models.IntegerField(blank=True,default=0)
+    content = models.IntegerField(blank=True,default=0)
+    overall_score = models.IntegerField(blank=True,default=0)
+    project = models.ForeignKey(Project,on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
