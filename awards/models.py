@@ -6,6 +6,7 @@ from django.db.models import Q
 import datetime as dt
 
 # Create your models here.
+
 class categories(models.Model):
     categories= models.CharField(max_length=100)
 
