@@ -2,7 +2,7 @@ from django.conf.urls import url,include
 from . import views
 from django.conf import settings
 from django.conf.urls.static import static
-
+from .views import ProjectCreateView
 urlpatterns=[
     url(r'^$',views.index,name='Index'),
     url(r'^create/profile$',views.create_profile, name='create-profile'),
@@ -15,10 +15,7 @@ urlpatterns=[
 
     url(r'^api/profiles/$', views.ProfileList.as_view()),
     url(r'^api/projects/$', views.ProjectList.as_view()),
-    url(r'^api/categories/$', views.categoriesList.as_view()),
-    url(r'^api/countries/$', views.countriesList.as_view()),
-    url(r'^api/technologies/$', views.technologiesList.as_view()),
-    url(r'^api/colors/$', views.colorsList.as_view()),
+    url(r'^project/new/',ProjectCreateView.as_view(),name='newProject'),
 
 ]
 

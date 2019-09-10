@@ -11,10 +11,12 @@ import json
 from django.db.models import Q
 from django.db.models import Max
 from django.contrib.auth.models import User
-
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializer import ProfileSerializer,ProjectSerializer
+from django.views.generic import (CreateView,DeleteView,UpdateView,ListView)
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
+
 
 
 # Create your views here.
@@ -36,7 +38,7 @@ def index(request):
     except ObjectDoesNotExist:
         return redirect('newProfile')
 
-    return render(request,'index.html',{"winners":winners,"profile":profile,"date":date,"nominees":nominees,"directories":directories,"resources":resources,"resources2":resources2})
+    return render(request,'index.html',{"winners":winners,date":date,"nominees":nominees,"directories":directories,"resources":resources,"resources2":resources2})
 
 @login_required(login_url='/accounts/login/')
 def create_profile(request):
@@ -180,7 +182,15 @@ def user_profile(request,username):
 
     return render(request,'userProfile.html',{"projects":projects,"profile":profile})
 
-
+class ProjectCreateView(LoginRequiredMixin,CreateView):
+    model=Project
+    fields=['title','description','link','screenshot1']
+    template_name='newProject.html'
+    success_url='/'
+    def form_valid(self,form):
+        
+        form.instance.username=self.request.user
+        return super().form_valid(form)
 
 class ProfileList(APIView):
     def get(self, request, format=None):
@@ -194,26 +204,3 @@ class ProjectList(APIView):
         serializers = ProjectSerializer(all_projects, many=True)
         return Response(serializers.data)
 
-class categoriesList(APIView):
-    def get(self, request, format=None):
-        all_categories = categories.objects.all()
-        serializers = categoriesSerializer(all_categories, many=True)
-        return Response(serializers.data)
-
-class technologiesList(APIView):
-    def get(self, request, format=None):
-        all_technologies = technologies.objects.all()
-        serializers = technologiesSerializer(all_technologies, many=True)
-        return Response(serializers.data)
-
-class colorsList(APIView):
-    def get(self, request, format=None):
-        all_colors = colors.objects.all()
-        serializers = colorsSerializer(all_colors, many=True)
-        return Response(serializers.data)
-
-class countriesList(APIView):
-    def get(self, request, format=None):
-        all_countries = countries.objects.all()
-        serializers = countriesSerializer(all_countries, many=True)
-        return Response(serializers.data)
