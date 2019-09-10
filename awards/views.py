@@ -57,7 +57,7 @@ def create_profile(request):
 @login_required(login_url='/accounts/login/')
 def new_project(request):
     current_user = request.user
-    #profile =Profile.objects.get(username=current_user)
+    # profile =Profile.objects.get(new_project)
     if request.method =='POST':
         form = ProjectForm(request.POST,request.FILES)
         if form.is_valid():
@@ -70,7 +70,7 @@ def new_project(request):
     else:
         form = ProjectForm()
 
-    return render(request,'newProject.html',{"form":form})
+    return render(request,'newProject.html',{form":form})
 
 def directory(request):
     date = dt.date.today()

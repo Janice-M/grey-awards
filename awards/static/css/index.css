@@ -108,7 +108,7 @@ h5{
   font-size: 18px;
 }
 .card-body{
- padding:8px;
+  padding:8px;
 }
 .user-image {
     width: calc(20.333% );
@@ -140,9 +140,8 @@ h5{
   -webkit-border-radius: 100px;
   -moz-border-radius: 100px;
 }
+
 .profile-image {
-}
-.profile-image img {
   margin-top: 40px;
   width: 100px;
   height: 100px;
