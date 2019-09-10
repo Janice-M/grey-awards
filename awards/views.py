@@ -70,7 +70,7 @@ def new_project(request):
     else:
         form = ProjectForm()
 
-    return render(request,'newProject.html',{form":form})
+    return render(request,'newProject.html',{ "form":form})
 
 def directory(request):
     date = dt.date.today()
