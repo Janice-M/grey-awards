@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
+
 {% load static %}
 {% load staticfiles %}
 
@@ -15,71 +16,108 @@
 
 {% block content %}
 
-<div class="carousel-inner">
-    <!-- <div class="landingpage" style="background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url({% static 'img/cocaine.png'%}) fixed;"> -->
-    <div class="landingpage">
-        <img src="{{caraousel.landing_page.url}}" class="landingpage-img">
-        <div class="time">
-            <p><span class="bold"> Stan of The Day</span> {{date}}</p>
+<style>
+    .home-content{
+      background-image: url(https://cdn.pixabay.com/photo/2018/08/14/13/23/ocean-3605547__340.jpg) !important;
+      background-attachment: fixed;
+      width:100%;
+      height: 80%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      height: 70vh;
+      position: relative;
+      margin-top: 30px;
+      margin-bottom: 30px;
+  }
+</style>
+<div class="container-fluid home-content" >
+    <!-- <h5 style="color:#0e0c0d">Site of the day {{date|date:"l d-F Y"}}</h5>
+    <br>
+    <a href="#" class="btn btn-outline-danger" style="color:rgb(8, 5, 5);">Visit Site</a>
+    <a href="#" class="btn btn-outline-danger" style="color:rgb(5, 5, 5);">Interact</a>
+    <a href="#" class="btn btn-outline-danger" style="color:rgb(7, 3, 3);">Collect</a> -->
+    <section class="sect">
+        <div>
+            <div class="box-piesite">
+                <ul> 
+                    <li class="design">
+                        <div class="piesite" id="pie_0" data-pie="2.04"></div>
+                        <br>
+                        <p style="color:red;font-size: 12px;">DESIGN</p>
+                    </li>
+                    <li class="usability">
+                        <div class="piesite" id="pie_2" data-pie="5.02"></div>
+                        <br>
+                        <p style="color:yellow;font-size: 12px;">USABILITY</p>
+                    </li>
+
+                    <li class="creativity">
+                        <div class="piesite" id="pie_1" data-pie="2.04"></div>
+                        <br>
+                        <p style="color:green;font-size: 12px;">CREATIVITY</p>
+                    </li>
+                    <li class="total">
+                        <div class="piesite" id="pie_3" data-pie="9.10"></div>
+                        <br>
+                        <p style="color:black;font-size: 12px;">TOTAL</p>
+                    </li>
+                </ul>
+            </div>
         </div>
 
-        <div class="header">
-            <a href="/site/{{caraousel.id}}" style="color:white;text-decoration:none;">
-                <h1>{{caraousel.title}}</h1>
-            </a>
-        </div>
-        <div class="page-body">
-            <p>BY <span style="color:#49c5b6;text-transform:uppercase;">{{caraousel.username}}</span> FROM <span
-                    class="bold">{{caraousel.country}}</span> WITH 0.75</p>
-        </div>
-
-        <div class="middle">
-
-            <div class="circle" id="circle-a">
-                <strong></strong>
-                <p class="rating">design</p>
-            </div>
-            <div class="circle" id="circle-b">
-                <strong></strong>
-                <p class="rating">content</p>
-            </div>
-            <div class="circle" id="circle-c">
-                <strong></strong>
-                <p class="rating">creativity</p>
-            </div>
-            <div class="circle" id="circle-d">
-                <strong></strong>
-                <p class="rating">content</p>
-            </div>
-
-        </div>
-    </div>
-</div>
+    </section>
 
 <div class="container headers">
-    <h4 style="float:left;"><span class="bold">TODAY'S WINNERS</span> PREVIOUS WINNERS </h4>
+    <h4 style="float:left;"><span class="bold">TODAY'S projects</span> </h4>
 
 </div>
 <div class="pages">
     <div class="row">
-        {% for winner in winners %}
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+        {% for project in projects %}
+        <div class="col-6"><div class="pages">
+            <div class="row">
+                {% for project in projects %}
+                <div class="col-6">
+                    <div class="card" style="width: 40.2rem;">
+                        <img class="card-img-top img-responsive" src="{{project.screenshot1.url}}" alt="Card image cap"
+                            responsive>
+                        <div class="card-body">
+                            <a href="/site/{{project.id}}" style="color:black;text-decoration:none;">
+                                <h5 class="card-title" style="line-height:28px;">{{project.title}}</h5>
+                            </a>
+                            <p class="card-text">From {{project.country}}<span class="date">{{project.post_date}}</span></p>
+                        </div>
+                        <div class="card-footer ">
+                            <div class="user-image">
+                                <img src="{{project.username.avatar.url}}" class="gallery-image" alt="" width=8 height=8>
+                                <a href="/user/{{project.username}}" style="color:black;text-decoration:none;margin:auto;">
+                                    <p
+                                        style="font-size: 13px; font-weight: lighter;margin:auto; padding:2px;text-transform: uppercase;">
+                                        {{project.username}}</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
             <div class="card" style="width: 40.2rem;">
-                <img class="card-img-top img-responsive" src="{{winner.landing_page.url}}" alt="Card image cap"
+                <img class="card-img-top img-responsive" src="{{project.screenshot1.url}}" alt="Card image cap"
                     responsive>
                 <div class="card-body">
-                    <a href="/site/{{winner.id}}" style="color:black;text-decoration:none;">
-                        <h5 class="card-title" style="line-height:28px;">{{winner.title}}</h5>
+                    <a href="/site/{{project.id}}" style="color:black;text-decoration:none;">
+                        <h5 class="card-title" style="line-height:28px;">{{project.title}}</h5>
                     </a>
-                    <p class="card-text">From {{winner.country}}<span class="date">{{winner.post_date}}</span></p>
+                    <p class="card-text">From {{project.country}}<span class="date">{{project.post_date}}</span></p>
                 </div>
                 <div class="card-footer ">
                     <div class="user-image">
-                        <img src="{{winner.avatar.url}}" class="gallery-image" alt="" width=8 height=8>
-                        <a href="/user/{{winner.username}}" style="color:black;text-decoration:none;margin:auto;">
+                        <img src="{{project.username.avatar.url}}" class="gallery-image" alt="" width=8 height=8>
+                        <a href="/user/{{project.username}}" style="color:black;text-decoration:none;margin:auto;">
                             <p
                                 style="font-size: 13px; font-weight: lighter;margin:auto; padding:2px;text-transform: uppercase;">
-                                {{winner.username}}</p>
+                                {{project.username}}</p>
                         </a>
                     </div>
                 </div>
@@ -89,94 +127,10 @@
     </div>
 </div>
 
-<div class="container headers">
-    <h4><span class="bold">Nominees</span> Rafiki, they need your vote!</h4>
-</div>
-
-<div class="pages">
-    <div class="row">
-        {% for nominee in nominees %}
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-            <div class="card" style="width: 40.2rem;">
-                <img class="card-img-top img-responsive" src="{{nominee.landing_page.url}}" alt="Card image cap"
-                    responsive>
-                <div class="card-body">
-                    <a href="/site/{{nominee.id}}" style="color:black;text-decoration:none;">
-                        <h5 class="card-title" style="line-height:28px;">{{nominee.title}}</h5>
-                    </a>
-                    <p class="card-text">From {{nominee.country}}<span class="date">{{nominee.post_date}}</span></p>
-                </div>
-                <div class="card-footer ">
-                    <div class="user-image">
-                        <img src="{{nominee.avatar.url}}" class="gallery-image" alt="" width=8 height=8>
-                        <a href="/user/{{nominee.username}}" style="color:black;text-decoration:none;margin:auto;">
-                            <p
-                                style="font-size: 13px; font-weight: lighter;margin:auto; padding:2px;text-transform: uppercase;">
-                                {{nominee.username}}</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-
-    </div>
-</div>
-
 
 <div class="container headers">
-    <h4><span class="bold">Directory</span> Find the Best In the Industry</h4>
-</div>
-
-<div class="pages">
-    <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-            <div class="card" style="height:44.6rem;width: 40.2rem;">
-                <!-- <img class="card-img-top img-responsive" src="{% static 'img/trial1.png'%}" alt="Card image cap" responsive> -->
-                <div class="card-body">
-                    <h5 class="card-title" style="line-height:28px;font-size:15px;">Professional Directory</h5>
-                    <p class="card-text professional">Discover the best in <span style="color:#49c5b6">East
-                            Africa</span></p>
-                    <br><br>
-                    <a href="{% url 'directory' %}">
-                        <button class="btn btn-default btn-sm" style="border-radius:18%;">Discover Magic!</button>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        {% for directory in directories %}
-        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-            <div class="card" style="width: 40.2rem;">
-                <img class="card-img-top img-responsive" src="{{directory.landing_page.url}}" alt="Card image cap"
-                    responsive>
-                <div class="card-body">
-                    <a href="/site/{{directory.id}}" style="color:black;text-decoration:none;">
-                        <h5 class="card-title" style="line-height:28px;">{{directory.title}}</h5>
-                    </a>
-                    <p class="card-text">From {{directory.country}}<span class="date">{{directory.post_date}}</span></p>
-                </div>
-                <div class="card-footer ">
-                    <div class="user-image">
-                        <img src="{{directory.avatar.url}}" class="gallery-image" alt="" width=8 height=8>
-                        <a href="/user/{{directory.username}}" style="color:black;text-decoration:none;margin:auto;">
-                            <p
-                                style="font-size: 13px; font-weight: lighter;margin:auto; padding:2px;text-transform: uppercase;">
-                                {{directory.username}}</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-
-    </div>
-</div>
-
-
-<div class="container headers">
-    <h4><span class="bold"> STANS <span><i class="glyphicon glyphicon-heart" style="color:#49c5b6"></i></span></span>
-        Stuff We Stan !</h4>
+    <h4><span class="bold">  <span><i class="glyphicon glyphicon-heart" style="color:#49c5b6"></i></span></span>
+        made with love !</h4>
 </div>
 
 <div class="pages">

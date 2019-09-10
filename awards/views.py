@@ -18,27 +18,11 @@ from django.views.generic import (CreateView,DeleteView,UpdateView,ListView)
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 
 
-
 # Create your views here.
 def index(request):
-    date = dt.date.today()
-    winners=Project.objects.all()[:4]
-    # carousel = Project.objects.order_by('-overall_score')[0]
-    nominees=Project.objects.all()[4:8]
-    directories=Project.objects.all()[8:11]
-    resources=Project.objects.all()[11:15]
-    resources2=Project.objects.all()[15:19]
-
-    try:
-        if not request.user.is_authenticated:
-            return redirect('/accounts/login/')
-        current_user = request.user
-        #profile = profile.objects.get(username=current_user)
-        print(current_user)
-    except ObjectDoesNotExist:
-        return redirect('newProfile')
-
-    return render(request,'index.html',{"winners":winners,date":date,"nominees":nominees,"directories":directories,"resources":resources,"resources2":resources2})
+    projects=Project.get_project()
+    
+    return render(request,'index.html',{'projects':projects})
 
 @login_required(login_url='/accounts/login/')
 def create_profile(request):
@@ -183,6 +167,11 @@ def user_profile(request,username):
     return render(request,'userProfile.html',{"projects":projects,"profile":profile})
 
 class ProjectCreateView(LoginRequiredMixin,CreateView):
+    
+    
+    
+    
+    
     model=Project
     fields=['title','description','link','screenshot1']
     template_name='newProject.html'
