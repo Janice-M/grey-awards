@@ -3,9 +3,7 @@ Grey Gram is an Awwards clone made using  Python's Django Framework.
 
 ![screenshot](/awards/static/images/Screenshot4.png)
 
-# Responsive version
 
-![screenshot](/awards/static/images/Screenshot5.png)
 
 ## Getting Started/Setup
 
